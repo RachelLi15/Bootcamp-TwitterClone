@@ -12,5 +12,24 @@ Theres a 'tweet' class you can use to style your tweet.
 */
 
 
+// make new type for tweet
+type Tweet = {username: String, content: String, likes: number, timestamp: String};
 
-// export default Tweet;
+export default function Tweet({username, content, likes, timestamp} : Tweet) {
+    const [liked, setLiked] = useState(false);
+    const [numLikes, updateLikes] = useState(likes);
+
+    return (
+        <div className="tweet">
+            <h2>@{username}</h2>
+            <p>{content}</p>
+            <p>{timestamp} ago</p>
+            <button onClick = {() => {
+                setLiked(!liked);
+                updateLikes(!liked ? numLikes + 1 : numLikes - 1);
+                }}>
+            {!liked ? '🤍' : '❤️'} {numLikes} Likes
+            </button>
+        </div> 
+    )
+}
